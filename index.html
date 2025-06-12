@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danzarín - Generador de Fotos Folklore Boliviano</title>
+    <link rel="stylesheet" href="styles.css">
+	
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@700&display=swap" rel="stylesheet">	
+
+</head>
+<body>
+
+<!-- Mensaje de introducción -->
+<div id="introModal" class="intro-modal">
+    <div class="intro-content">
+        <h2 class="intro-title">¡Bienvenido a Danzarín! 🎭</h2>
+        <div class="intro-text">
+            <p><strong>📝 Pon tu nombre</strong></p>
+            <p><strong>💃 Selecciona tu danza</strong></p>
+            <p><strong>📸 Sube una foto</strong></p>
+            <p><strong>🔄 Puedes mover y escalar tu foto</strong></p>
+        </div>
+        <button id="introBtn" class="intro-btn">¡Empecemos! ✨</button>
+    </div>
+</div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title">DANZARÍN - ENTRADA UNIVERSITARIA USFX 2025</h1>
+            
+            <!-- ✅ CONTADORES PEQUEÑOS: SOLO ICONO + NÚMERO -->
+            <div class="stats-container">
+                <div class="stat-item">
+                    <svg class="stat-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                    </svg>
+                    <span id="viewCount" class="stat-number">0</span>
+                </div>
+                
+                <div class="stat-item">
+                    <svg class="stat-icon" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                    </svg>
+                    <span id="downloadCount" class="stat-number">0</span>
+                </div>
+            </div>
+            
+            <p class="subtitle">Crea tu foto oficial de danza folklórica boliviana</p>
+        </header>
+
+        <main class="main-content">
+            <section class="form-section">
+                <div class="form-group">
+                    <label for="fullName" class="form-label">Nombre y Apellido</label>
+                    <input type="text" id="fullName" class="form-input" placeholder="Ingresa tu nombre completo">
+                </div>
+
+                <div class="form-group">
+                    <label for="danceSelect" class="form-label">Selecciona tu Danza</label>
+                    <select id="danceSelect" class="form-select">
+                        <option value="">-- Selecciona una danza --</option>
+                        <option value="Diablada">Diablada</option>
+                        <option value="Morenada">Morenada</option>
+                        <option value="Caporal">Caporal</option>
+                        <option value="Tinkuy">Tinkuy</option>
+                        <option value="Mineritos">Mineritos</option>
+                        <option value="Cueca Chuquisaqueña">Cueca Chuquisaqueña</option>
+                        <option value="Tobas">Tobas</option>
+                        <option value="Estampa Chapaca">Estampa Chapaca</option>
+						<option value="Carnaval Chicheño">Carnaval Chicheño</option>
+						<option value="Wititis">Wititis</option>
+						<option value="Tarqueada">Tarqueada</option>
+                        <option value="Pujllay">Pujllay</option>
+						<option value="Saya">Saya</option>
+						<option value="Pim pim">Pim pim</option>
+						<option value="Chacarera">Chacarera</option>
+                        <option value="Otros">Otros</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="otherDanceGroup" style="display: none;">
+                    <label for="otherDance" class="form-label">Especifica la Danza</label>
+                    <input type="text" id="otherDance" class="form-input" placeholder="Ingresa el nombre de la danza">
+                </div>
+
+                <div class="form-group">
+                    <label for="imageUpload" class="form-label">Cargar tu Foto</label>
+                    <div class="upload-area" id="uploadArea">
+                        <input type="file" id="imageUpload" accept="image/*" class="file-input">
+                        <div class="upload-content">
+                            <svg class="upload-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <p class="upload-text">Haz clic aquí o arrastra tu imagen</p>
+                            <p class="upload-hint">PNG, JPG hasta 10MB</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ✅ BOTÓN MOVIDO AQUÍ - ABAJO DEL FORMULARIO -->
+                <div class="form-group">
+                    <button id="downloadBtn" class="download-btn" disabled>
+                        <svg class="download-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-4-4m4 4l4-4m5-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Descargar Imagen
+                    </button>
+                </div>
+            </section>
+
+            <section class="canvas-section">
+                <div class="canvas-container">
+                    <canvas id="mainCanvas" class="main-canvas"></canvas>
+                    <div class="canvas-controls">
+                        <p class="controls-hint">Arrastra para mover • Rueda del mouse para zoom</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- ✅ SECCIÓN DE IMAGEN INFERIOR -->
+        <section class="bottom-image-section">
+            <div class="bottom-image-container">
+                <img src="assets/bottom-banner.jpg" alt="Banner Footer" class="bottom-banner-image">
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+
+
+
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', initFloatingBall); 
+</script>
+
+</body>
+</html>

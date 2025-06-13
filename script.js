@@ -493,7 +493,7 @@ const lineHeight = isMobile ? 25 * scaleFactor : 15 * scaleFactor;
     ctx.font = `700 ${24 * scaleFactor}px Poppins, Arial`; // ✅ FUENTE POPPINS BOLD
     ctx.fillStyle = '#FFD700'; // ✅ COLOR AMARILLO
 
-    ctx.fillText('DANZA:', textX, textY); // ✅ SOLO TEXTO PLANO
+    ctx.fillText('CARRERA:', textX, textY); // ✅ SOLO TEXTO PLANO
     textY += lineHeight;
     
     // Nombre de la danza

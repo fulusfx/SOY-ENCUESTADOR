@@ -616,10 +616,10 @@ function downloadImage() {
         
         // ✅ MENSAJE DESPUÉS DE DESCARGA
         setTimeout(() => {
-            alert('✅ ¡Descarga completada!\n\n📋 Llena el siguiente formulario para completar el proceso de inscripción como bailarín de la USFX.\n\n🎭 ¡Gracias por participar!');
+            alert('✅ ¡Descarga completada!\n\n📋 Llena el siguiente formulario para completar el proceso de registro de ENCUESTADOR.\n\n🎭 ¡Gracias por participar!');
             
             setTimeout(() => {
-                window.open('https://docs.google.com/forms/d/e/1FAIpQLSeTfMtTzWq7LVPUl8tJ5lIt2DnlISnz192LWabErIw70FN-wA/viewform?usp=header', '_blank');
+                window.open('https://docs.google.com/forms/d/e/1FAIpQLSd7o398_mijhlM77cE5TnO6fWkZovaQCKtU65zUmwRfIwGzRw/viewform?usp=dialog', '_blank');
             }, 1000);
         }, 500);
     }, 'image/png');

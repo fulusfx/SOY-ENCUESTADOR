@@ -460,7 +460,10 @@ function updateCanvas() {
 function drawTextUnified(ctx, scaleFactor = 1) {
     const textX = 15 * scaleFactor; // 🔧 POSICIÓN HORIZONTAL - Modifica aquí
     let textY = 300 * scaleFactor; // 🔧 POSICIÓN VERTICAL - Subido 50px (era 350)
-    const lineHeight = 30 * scaleFactor; // 🔧 ESPACIO ENTRE LÍNEAS - Reducido al 50% (era 35)
+    
+    // ✅ RESPONSIVE: Más espacio en móviles, normal en PC
+const isMobile = window.innerWidth < 500;
+const lineHeight = isMobile ? 25 * scaleFactor : 15 * scaleFactor;
     
     ctx.textAlign = 'left';
     
@@ -474,7 +477,7 @@ function drawTextUnified(ctx, scaleFactor = 1) {
     if (appState.fullName.trim()) {
         const names = appState.fullName.trim().split(' ');
         
-        ctx.font = `700 ${23 * scaleFactor}px Poppins, Arial`; // ✅ FUENTE POPPINS BOLD
+        ctx.font = `700 ${22 * scaleFactor}px Poppins, Arial`; // ✅ FUENTE POPPINS BOLD
         ctx.fillStyle = '#FFFFFF'; // ✅ COLOR BLANCO
         
         // Dibujar cada palabra en línea separada
@@ -496,7 +499,7 @@ function drawTextUnified(ctx, scaleFactor = 1) {
     // Nombre de la danza
     const danceText = getDanceText();
     if (danceText) {
-        ctx.font = `700 ${20 * scaleFactor}px Poppins, Arial`; // ✅ FUENTE POPPINS BOLD
+        ctx.font = `700 ${26 * scaleFactor}px Poppins, Arial`; // ✅ FUENTE POPPINS BOLD
         ctx.fillStyle = '#FFFFFF'; // ✅ COLOR BLANCO
         
         // ✅ CADA ESPACIO = NUEVA LÍNEA
@@ -640,11 +643,93 @@ document.addEventListener('DOMContentLoaded', function() {
     // Mostrar modal al cargar
     introModal.style.display = 'flex';
     
-    // Ocultar modal al hacer clic
     introBtn.addEventListener('click', function() {
+        // ✅ PASO 1: Ocultar modal con animación
         introModal.classList.add('hidden');
+        
         setTimeout(() => {
             introModal.style.display = 'none';
-        }, 300);
+            
+            // ✅ PASO 2: INICIAR SCROLL AUTOMÁTICO después de que se oculte el modal
+            setTimeout(() => {
+                startAutoScroll();
+            }, 10); // ✅ Pequeña pausa antes de empezar el scroll
+            
+        }, 500); // ✅ Tiempo de animación del modal
     });
 });
+
+
+// ✅ SCROLL AUTOMÁTICO - Variables globales
+let autoScrollActive = false;
+let scrollInterval;
+
+
+function startAutoScroll() {
+    autoScrollActive = true;
+    const scrollDuration = 3000; // ✅ DURACIÓN: 2 segundos de scroll automático
+    const scrollDistance = (document.body.scrollHeight - window.innerHeight) * 0.5; // ✅ SCROLL AL 80%
+    const startTime = Date.now();
+    const startPosition = window.pageYOffset;
+    
+    // ✅ CONFIGURAR DETECCIÓN DE INTERACCIÓN ANTES DE EMPEZAR
+    setupAutoScrollStop();
+    
+    scrollInterval = setInterval(() => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / scrollDuration, 1);
+        
+        // ✅ ANIMACIÓN SUAVE: Función de easing para transición natural
+        const easeProgress = Math.sin(progress * Math.PI / 2); // ✅ SÚPER SUAVE: Curva sinusoidal
+        const currentPosition = startPosition + (scrollDistance * easeProgress);
+        
+        window.scrollTo(0, currentPosition);
+        
+        // ✅ DETENER AUTOMÁTICAMENTE DESPUÉS DE 2 SEGUNDOS
+        if (progress >= 1) {
+            stopAutoScroll();
+        }
+    }, 50); // ✅ 60 FPS para animación fluida
+}
+
+
+function stopAutoScroll() {
+    autoScrollActive = false;
+    if (scrollInterval) {
+        clearInterval(scrollInterval);
+    }
+    // ✅ REMOVER LISTENERS PARA EVITAR ACUMULACIÓN
+    removeScrollStopListeners();
+}
+
+
+// ✅ DETECTAR CUALQUIER INTERACCIÓN DEL USUARIO Y DETENER SCROLL
+let scrollStopListeners = [];
+
+function setupAutoScrollStop() {
+    const events = [
+        'scroll',     // ✅ Usuario hace scroll manual
+        'wheel',      // ✅ Usuario usa rueda del mouse
+        'touchstart', // ✅ Usuario toca la pantalla (móvil)
+        'mousedown',  // ✅ Usuario presiona mouse
+        'keydown'     // ✅ Usuario presiona tecla
+    ];
+    
+    events.forEach(event => {
+        const listener = () => {
+            if (autoScrollActive) {
+                stopAutoScroll();
+            }
+        };
+        
+        window.addEventListener(event, listener, { passive: true });
+        scrollStopListeners.push({ event, listener });
+    });
+}
+
+function removeScrollStopListeners() {
+    scrollStopListeners.forEach(({ event, listener }) => {
+        window.removeEventListener(event, listener);
+    });
+    scrollStopListeners = [];
+}

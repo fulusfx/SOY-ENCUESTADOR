@@ -1,0 +1,543 @@
+/* Variables CSS */
+:root {
+    --primary-color: #0c4d9b; /* Dorado boliviano */
+    --secondary-color: #B22222; /* Rojo folklórico */
+    --accent-color: #000000; /* Verde de la bandera */
+    --dark-color: #2C1810; /* Marrón oscuro */
+    --light-color: #FFF8DC; /* Crema suave */
+    --text-dark: #333333;
+    --text-light: #666666;
+    --background: #F8F6F0;
+    --shadow: rgba(212, 175, 55, 0.2);
+    --border-radius: 8px;
+    --transition: all 0.3s ease;
+}
+
+/* Reset y configuración base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%); /* ✅ FONDO OSCURO */
+    color: #ffffff; /* ✅ TEXTO BLANCO */
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Header */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 0;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 32px var(--shadow);
+    color: white;
+}
+
+.title {
+    font-size: 5rem; /* ✅ Reducido ligeramente para texto largo */
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif; /* ✅ FUENTE ANTON */
+    margin-bottom: 10px;
+    letter-spacing: 1.5px; /* ✅ Espaciado reducido */
+    color: #FFFFFF; /* ✅ COLOR BLANCO SIMPLE */
+    line-height: 1.1; /* ✅ Líneas más compactas */
+    text-align: center;
+    /* ✅ SIN GRADIENTE, SIN RESPLANDOR, SIN EFECTOS */
+}
+
+/* Fallback específico para navegadores móviles que no soportan gradiente en texto */
+@supports not (-webkit-background-clip: text) {
+    .title {
+        background: none;
+        color: #FF0000;
+        text-shadow: 
+            2px 2px 0px #0066CC,
+            4px 4px 8px rgba(0,0,0,0.5);
+    }
+}
+
+/* ✅ CONTADORES PEQUEÑOS Y SIMPLES */
+.stats-container {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 8px 0;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    opacity: 1;
+}
+
+.stat-icon {
+    width: 12px;
+    height: 12px;
+    color: #FFD700;
+}
+
+.stat-number {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
+}
+
+/* ✅ ANIMACIÓN CUANDO SE ACTUALIZA EL CONTADOR */
+.stat-number.updated {
+    color: #FFD700;
+}
+
+.stat-item.pulse {
+    animation: pulse 0.4s ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 300;
+    padding: 0 20px;           /* Añadir padding lateral */
+    text-align: center;        /* Centrar texto */
+    line-height: 1.4;          /* Mejor espaciado entre líneas */
+    max-width: 90%;            /* Limitar ancho máximo */
+    margin: 0 auto;            /* Centrar elemento */
+}
+
+/* Main content */
+.main-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* Form section */
+.form-section {
+    background: white;
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border: 2px solid var(--primary-color);
+}
+
+.form-group {
+    margin-bottom: 5px; /* ✅ SÚPER REDUCIDO: Espacio mínimo entre campos del formulario */
+}
+
+.form-label {
+    display: block; /* ✅ BLOQUE: Cada etiqueta ocupa toda la línea */
+    margin-bottom: 8px; /* ✅ ESPACIO: Separación entre etiqueta y campo */
+    font-weight: 600; /* ✅ PESO: Texto en semi-negrita para destacar */
+    color: var(--dark-color); /* ✅ COLOR: Color oscuro usando variable global */
+    font-size: 1.1rem; /* ✅ TAMAÑO: Ligeramente más grande que texto normal */
+}
+
+.form-input,
+.form-select {
+    width: 100%; /* ✅ ANCHO: Campos ocupan todo el ancho disponible */
+    padding: 15px; /* ✅ PADDING: Espacio interno cómodo para escribir */
+    border: 2px solid #E0E0E0; /* ✅ BORDE: Línea gris clara de 2px */
+    border-radius: var(--border-radius); /* ✅ ESQUINAS: Bordes redondeados usando variable */
+    font-size: 1rem; /* ✅ TAMAÑO FUENTE: Tamaño estándar legible */
+    transition: var(--transition); /* ✅ ANIMACIÓN: Transición suave para focus */
+    background: white; /* ✅ FONDO: Fondo blanco limpio */
+}
+
+.form-input:focus,
+.form-select:focus {
+    outline: none; /* ✅ SIN OUTLINE: Elimina el borde azul por defecto del navegador */
+    border-color: var(--primary-color); /* ✅ BORDE FOCUS: Cambia a dorado cuando está activo */
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1); /* ✅ SOMBRA: Resplandor dorado sutil alrededor */
+}
+
+/* ✅ ÁREA DE CARGA DE ARCHIVOS - Cuadro donde se arrastra/selecciona imagen */
+.upload-area {
+    position: relative; /* ✅ POSICIÓN: Permite posicionar elementos hijos de forma absoluta */
+    border: 3px dashed var(--primary-color); /* ✅ BORDE: Línea punteada dorada de 3px */
+    border-radius: var(--border-radius); /* ✅ ESQUINAS: Bordes redondeados usando variable global */
+    padding: 5px 5px; /* ✅ PADDING MÍNIMO: Espacio interno súper reducido (era 40px) */
+    text-align: center; /* ✅ ALINEACIÓN: Centra todo el contenido del cuadro */
+    cursor: pointer; /* ✅ CURSOR: Muestra manita al pasar mouse (indica clickeable) */
+    transition: var(--transition); /* ✅ ANIMACIÓN: Transición suave para hover usando variable */
+    background: linear-gradient(45deg, rgba(212, 175, 55, 0.05), rgba(178, 34, 34, 0.05)); /* ✅ FONDO: Degradado sutil dorado-rojo */
+}
+
+.upload-area:hover {
+    border-color: var(--secondary-color); /* ✅ HOVER BORDE: Cambia a color secundario (rojo) al pasar mouse */
+    background: linear-gradient(45deg, rgba(212, 175, 55, 0.1), rgba(178, 34, 34, 0.1)); /* ✅ HOVER FONDO: Degradado más intenso en hover */
+}
+
+.file-input {
+    position: absolute; /* ✅ POSICIÓN: Se coloca encima del área de upload */
+    inset: 0; /* ✅ COBERTURA: Cubre toda el área del contenedor padre */
+    opacity: 0; /* ✅ INVISIBLE: Campo oculto visualmente pero funcional */
+    cursor: pointer; /* ✅ CURSOR: Manita para indicar que es clickeable */
+}
+
+.upload-content {
+    pointer-events: none; /* ✅ SIN EVENTOS: Evita que el contenido interfiera con clicks del input */
+}
+
+.upload-icon {
+    width: 24px; /* ✅ ICONO MÁS PEQUEÑO: Reducido de 48px a 24px */
+    height: 24px; /* ✅ ICONO MÁS PEQUEÑO: Reducido de 48px a 24px */
+    color: var(--primary-color); /* ✅ COLOR: Mantiene el color dorado principal */
+    margin-bottom: 5px; /* ✅ ESPACIO REDUCIDO: Menos espacio debajo del icono */
+}
+
+.upload-text {
+    font-size: 1.2rem; /* ✅ TAMAÑO FUENTE: Texto principal del upload */
+    font-weight: 600; /* ✅ PESO FUENTE: Texto en negrita para destacar */
+    color: var(--dark-color); /* ✅ COLOR: Color oscuro para buena legibilidad */
+    margin-bottom: 2px; /* ✅ ESPACIO REDUCIDO: Menos espacio entre líneas de texto */
+    line-height: 1.1; /* ✅ ALTURA LÍNEA: Líneas más compactas entre sí */
+}
+
+.upload-hint {
+    color: var(--text-light); /* ✅ COLOR: Texto gris claro para información secundaria */
+    font-size: 0.9rem; /* ✅ TAMAÑO: Más pequeño que el texto principal */
+    line-height: 1.1; /* ✅ ALTURA LÍNEA: Líneas compactas para texto de ayuda */
+    margin-top: 0px; /* ✅ SIN MARGEN: Elimina espacio extra arriba */
+}
+
+/* Canvas section */
+.canvas-section {
+    background: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border: 2px solid var(--accent-color);
+}
+
+.canvas-container {
+    position: relative; /* ✅ NECESARIO PARA POSICIONAR EL BOTÓN */
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.main-canvas {
+    width: 100%;
+    aspect-ratio: 1;
+    max-height: 600px;
+    border: 2px solid var(--dark-color);
+    border-radius: var(--border-radius);
+    cursor: move;
+    background: #f9f9f9;
+    display: block;
+}
+
+.canvas-controls {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.controls-hint {
+    color: var(--text-light);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Download button */
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 36px;
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%; /* ✅ ANCHO COMPLETO EN EL FORMULARIO */
+}
+
+.download-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+}
+
+.download-btn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.download-icon {
+    width: 24px;
+    height: 24px;
+}
+
+/* Responsive design */
+@media (max-width: 968px) {
+    .main-content {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .title {
+        font-size: 2rem; /* ✅ Reducido para texto más largo */
+    }
+    
+    .container {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 640px) {
+    .title {
+        font-size: 1.3rem; /* ✅ Más pequeño para móvil con texto largo */
+    }
+    
+    .subtitle {
+        font-size: 0.9rem;         /* Tamaño más pequeño */
+        padding: 0 15px;           /* Más padding en móvil */
+        line-height: 1.5;          /* Mejor espaciado */
+        max-width: 95%;            /* Usar más ancho en móvil */
+    }
+    
+    /* ✅ CONTADORES RESPONSIVE MÓVIL */
+    .stats-container {
+        gap: 10px;
+        margin: 5px 0;
+    }
+    
+    .stat-icon {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .stat-number {
+        font-size: 0.7rem;
+    }
+    
+    .form-section {
+        padding: 20px;
+    }
+    
+    .upload-area {
+        padding: 30px 15px;
+    }
+    
+    .main-canvas {
+        max-height: 400px;
+    }
+    
+
+}
+
+/* Responsive extra para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .title {
+        font-size: 1rem; /* ✅ Muy pequeño para pantallas pequeñas */
+        letter-spacing: 0.5px;
+        line-height: 1.2;
+        padding: 0 10px;
+    }
+    
+    .subtitle {
+        font-size: 0.85rem;
+        padding: 0 10px;
+        line-height: 1.6;
+    }
+    
+    .container {
+        padding: 10px;
+    }
+    
+    .intro-content {
+        padding: 30px 20px;
+        margin: 10px;
+    }
+    
+    .intro-title {
+        font-size: 1.5rem;
+    }
+    
+    .intro-text {
+        font-size: 1rem;
+    }
+}
+
+/* Estados especiales */
+.upload-area.dragover {
+    border-color: var(--secondary-color);
+    background: rgba(178, 34, 34, 0.1);
+}
+
+.form-input.error,
+.form-select.error {
+    border-color: #ff4444;
+    background-color: rgba(255, 68, 68, 0.05);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.form-group {
+    animation: fadeIn 0.6s ease forwards;
+}
+
+.form-group:nth-child(1) { animation-delay: 0.1s; }
+.form-group:nth-child(2) { animation-delay: 0.2s; }
+.form-group:nth-child(3) { animation-delay: 0.3s; }
+.form-group:nth-child(4) { animation-delay: 0.4s; }
+
+/* Loading state */
+.loading {
+    position: relative;
+    overflow: hidden;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.3), transparent);
+    animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Mensaje flotante de introducción */
+.intro-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.intro-modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.intro-content {
+    background: linear-gradient(135deg, #FFD700 0%, #FF6B6B 50%, #4ECDC4 100%);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 500px;
+    margin: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border: 3px solid #FFFFFF;
+}
+
+.intro-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.intro-text {
+    font-size: 1.1rem;
+    color: #FFFFFF;
+    margin-bottom: 30px;
+    line-height: 1.6;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.intro-btn {
+    background: #228B22;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.intro-btn:hover {
+    background: #32CD32;
+    transform: translateY(-2px);
+    box-shadow: 0 7px 20px rgba(0,0,0,0.4);
+}
+
+/* ✅ SECCIÓN DE IMAGEN INFERIOR */
+.bottom-image-section {
+    margin-top: 40px;
+    width: 100%;
+    background: #111111;
+    padding: 0;
+    border-top: 2px solid #333333;
+}
+
+.bottom-image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bottom-banner-image {
+    width: 100%; /* ✅ ANCHO COMPLETO DE LA PÁGINA */
+    height: 200px; /* ✅ ALTURA FIJA 200px */
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+/* Responsive para imagen inferior */
+@media (max-width: 640px) {
+    .bottom-image-section {
+        margin-top: 20px;
+    }
+    
+    .bottom-banner-image {
+        height: 150px; /* ✅ ALTURA REDUCIDA EN MÓVIL */
+    }
+}
